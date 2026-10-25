@@ -25,11 +25,11 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-TOKEN = os.getenv('8928732375:AAGdEVVWsE5-aUSyf7p_UOmiJ928COcfRPs')
-OWNER_ID_STR = os.getenv('8777129138')
-ADMIN_ID_STR = os.getenv('8777129138')
-YOUR_USERNAME = os.getenv('@FrenzyHe', '@FrenzyHex')
-UPDATE_CHANNEL = os.getenv('https://t.me/frenzyofficiall', 'https://t.me/frenzyofficiall')
+TOKEN = os.getenv('BOT_TOKEN')
+OWNER_ID_STR = os.getenv('OWNER_ID')
+ADMIN_ID_STR = os.getenv('ADMIN_ID')
+YOUR_USERNAME = os.getenv('YOUR_USERNAME', '@FrenzyHex')
+UPDATE_CHANNEL = os.getenv('UPDATE_CHANNEL', 'https://t.me/frenzyofficiall')
 
 if not TOKEN:
     logger.error("BOT_TOKEN not found in environment variables!")
@@ -46,8 +46,6 @@ except ValueError:
     logger.error("OWNER_ID or ADMIN_ID must be valid integers!")
     raise
 
-YOUR_USERNAME = '@FrenzyHex'
-UPDATE_CHANNEL = 'https://t.me/frenzyofficiall'
 YOUTUBE_CHANNEL = 'https://youtube.com/@frenzycheatss'
 CHANNEL_USERNAME = '@' + UPDATE_CHANNEL.rstrip('/').split('/')[-1]
 
@@ -2205,7 +2203,7 @@ _BOT_USERNAME = None
 
 def _auth_ok(request):
     if not ADMIN_PASSWORD:
-        return True  # password set nahi hai to panel open rahega
+        return False  # password set nahi hai to panel band rahega (security)
     h = request.headers.get('Authorization', '')
     if not h.startswith('Basic '):
         return False
